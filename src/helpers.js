@@ -1,4 +1,30 @@
+const generateRandomColor = () => {
+  const existBudgetLength = fetchData('budgets')?.length ?? 0;
+  return `${existBudgetLength * 34} 65% 50%`;
+};
+
 // local storage
 export const fetchData = (key) => {
   return JSON.parse(localStorage.getItem(key));
+};
+
+//create budget
+export const createBudget = ({ name, amount }) => {
+  const newitem = {
+    id: crypto.randomUUID(),
+    name: name,
+    createAt: Date.now(),
+    amount: +amount,
+    color: generateRandomColor(),
+  };
+  const existingBudgets = fetchData('budgets') ?? [];
+  return localStorage.setItem(
+    'budgets',
+    JSON.stringify([...existingBudgets, newitem])
+  );
+};
+
+//delete item
+export const deleteItem = ({ key }) => {
+  return localStorage.removeItem(key);
 };
