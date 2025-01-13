@@ -2,7 +2,7 @@
 import { useLoaderData } from 'react-router-dom';
 
 //helpers
-import { createBudget, fetchData } from '../helpers';
+import { createBudget, fetchData, wait } from '../helpers';
 
 //components
 import Intro from '../components/Intro';
@@ -20,6 +20,7 @@ export function dashboardLoader() {
 
 //action
 export async function dashboadrAction({ request }) {
+  await wait();
   const data = await request.formData();
   /*  const userName = data.get('userName');
   console.log(userName); */
