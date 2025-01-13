@@ -1,53 +1,49 @@
-//rrd imports
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-//library imports
-import { ToastContainer, toast } from 'react-toastify';
+// Library
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-//layouts
-import Main, { maindLoader } from './layouts/Main';
+// Layouts
+import Main, { mainLoader } from "./layouts/Main";
 
-//routes
-import Dashboard, { dashboadrAction, dashboardLoader } from './pages/Dashboard';
-import Error from './pages/Error';
+// Actions
+import { logoutAction } from "./actions/logout";
 
-//actions
-import { logoutAction } from './actions/logout';
+// Routes
+import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Main />,
-    loader: maindLoader,
+    loader: mainLoader,
     errorElement: <Error />,
     children: [
       {
         index: true,
         element: <Dashboard />,
         loader: dashboardLoader,
-        action: dashboadrAction,
-        errorElement: <Error />,
+        action: dashboardAction,
+        errorElement: <Error />
       },
       {
-        path: 'logout',
-        action: logoutAction,
-      },
-    ],
+        path: "logout",
+        action: logoutAction
+      }
+    ]
   },
-  //or  --- path *
-  /*   {
-    path: '*',
-    element: <Error />,
-  }, */
 ]);
 
 function App() {
-  return (
-    <div className="App">
-      <RouterProvider router={router} />
-      <ToastContainer />
-    </div>
-  );
+  return <div className="App">
+    <RouterProvider router={router} />
+    <ToastContainer />
+  </div>;
 }
 
 export default App;

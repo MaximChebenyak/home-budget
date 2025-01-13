@@ -1,30 +1,36 @@
-//react imports
-import { useEffect, useRef } from 'react';
+// reacts
+import { useEffect, useRef } from "react";
 
 // rrd imports
-import { Form, useFetcher } from 'react-router-dom';
+import { Form, useFetcher } from "react-router-dom"
 
-//libary
-import { CurrencyDollarIcon } from '@heroicons/react/24/solid';
+// library imports
+import { CurrencyDollarIcon } from "@heroicons/react/24/solid"
 
 const AddBudgetForm = () => {
   const fetcher = useFetcher();
-  const isSubmitting = fetcher.state === 'submitting';
+  const isSubmitting = fetcher.state === "submitting"
 
   const formRef = useRef();
   const focusRef = useRef();
 
   useEffect(() => {
     if (!isSubmitting) {
-      formRef.current.reset();
-      focusRef.current.focus();
+      formRef.current.reset()
+      focusRef.current.focus()
     }
-  }, [isSubmitting]);
+  }, [isSubmitting])
 
   return (
     <div className="form-wrapper">
-      <h2 className="h3">Create budget</h2>
-      <fetcher.Form method="post" className="grid-sm" ref={formRef}>
+      <h2 className="h3">
+        Create budget
+      </h2>
+      <fetcher.Form
+        method="post"
+        className="grid-sm"
+        ref={formRef}
+      >
         <div className="grid-xs">
           <label htmlFor="newBudget">Budget Name</label>
           <input
@@ -43,25 +49,24 @@ const AddBudgetForm = () => {
             step="0.01"
             name="newBudgetAmount"
             id="newBudgetAmount"
-            placeholder="e.g., $350 "
+            placeholder="e.g., $350"
             required
             inputMode="decimal"
           />
         </div>
         <input type="hidden" name="_action" value="createBudget" />
         <button type="submit" className="btn btn--dark" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <span>Submitting</span>
-          ) : (
-            <>
-              {' '}
-              <span>Create Budget</span>
-              <CurrencyDollarIcon width={20} />
-            </>
-          )}
+          {
+            isSubmitting ? <span>Submitting…</span> : (
+              <>
+                <span>Create budget</span>
+                <CurrencyDollarIcon width={20} />
+              </>
+            )
+          }
         </button>
       </fetcher.Form>
     </div>
-  );
-};
-export default AddBudgetForm;
+  )
+}
+export default AddBudgetForm
