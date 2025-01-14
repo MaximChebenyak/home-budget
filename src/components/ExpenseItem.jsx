@@ -1,13 +1,13 @@
-import { formatCurrency } from '../helpers';
-import { formateDateToLocaleString } from '../helpers';
+// helper imports
+import { formatCurrency, formatDateToLocaleString } from "../helpers"
 
 const ExpenseItem = ({ expense }) => {
   return (
     <>
       <td>{expense.name}</td>
       <td>{formatCurrency(expense.amount)}</td>
-      <td>{formateDateToLocaleString(expense.createdAt)}</td>
+      <td>{formatDateToLocaleString(expense.createdAt)}</td>
     </>
-  );
-};
-export default ExpenseItem;
+  )
+}
+export default ExpenseItem

@@ -3,7 +3,7 @@ export const waait = () =>
 
 // colors
 const generateRandomColor = () => {
-  const existingBudgetLength = fetchData('budgets')?.length ?? 0;
+  const existingBudgetLength = fetchData("budgets")?.length ?? 0;
   return `${existingBudgetLength * 34} 65% 50%`;
 };
 
@@ -21,9 +21,9 @@ export const createBudget = ({ name, amount }) => {
     amount: +amount,
     color: generateRandomColor(),
   };
-  const existingBudgets = fetchData('budgets') ?? [];
+  const existingBudgets = fetchData("budgets") ?? [];
   return localStorage.setItem(
-    'budgets',
+    "budgets",
     JSON.stringify([...existingBudgets, newItem])
   );
 };
@@ -37,9 +37,9 @@ export const createExpense = ({ name, amount, budgetId }) => {
     amount: +amount,
     budgetId: budgetId,
   };
-  const existingExpenses = fetchData('expenses') ?? [];
+  const existingExpenses = fetchData("expenses") ?? [];
   return localStorage.setItem(
-    'expenses',
+    "expenses",
     JSON.stringify([...existingExpenses, newItem])
   );
 };
@@ -51,7 +51,7 @@ export const deleteItem = ({ key }) => {
 
 // total spent by budget
 export const calculateSpentByBudget = (budgetId) => {
-  const expenses = fetchData('expenses') ?? [];
+  const expenses = fetchData("expenses") ?? [];
   const budgetSpent = expenses.reduce((acc, expense) => {
     // check if expense.id === budgetId I passed in
     if (expense.budgetId !== budgetId) return acc;
@@ -63,14 +63,13 @@ export const calculateSpentByBudget = (budgetId) => {
 };
 
 // FORMATTING
-export const formateDateToLocaleString = (epoch) => {
-  return new Date(epoch).toLocaleDateString();
-};
+export const formatDateToLocaleString = (epoch) =>
+  new Date(epoch).toLocaleDateString();
 
 // Formating percentages
 export const formatPercentage = (amt) => {
   return amt.toLocaleString(undefined, {
-    style: 'percent',
+    style: "percent",
     minimumFractionDigits: 0,
   });
 };
@@ -78,7 +77,7 @@ export const formatPercentage = (amt) => {
 // Format currency
 export const formatCurrency = (amt) => {
   return amt.toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'USD',
+    style: "currency",
+    currency: "USD",
   });
 };
